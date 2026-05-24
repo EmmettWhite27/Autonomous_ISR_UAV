@@ -1,18 +1,572 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Emmett White</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmett White - Aerospace Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero .title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .about h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-item {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        .about-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            margin-bottom: 3rem;
+        }
+
+        .projects h2 {
+            color: #667eea;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+        }
+
+        .project-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .tech-stack {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-badge {
+            background-color: #e8eaf6;
+            color: #667eea;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            margin-top: auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .project-links a:hover {
+            color: #764ba2;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: white;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .skills h2 {
+            color: #667eea;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: #555;
+        }
+
+        .skill-list li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .contact-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Emmett White</h1>
-    <p>Aerospace Engineering Student at Georgia Tech</p>
-    <p>Air Force ROTC Cadet</p>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <h2>Projects</h2>
-    <ul>
-        <li>Autonomous ISR UAV</li>
-        <li>Physics Simulations</li>
-        <li>CAD and CNC Projects</li>
-    </ul>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Emmett White</h1>
+            <p class="title">Aerospace Engineer | ROTC Cadet | Designer</p>
+            <p>Building innovative autonomous systems and pushing the boundaries of aerospace engineering</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- About Section -->
+        <section class="about" id="about">
+            <h2>About Me</h2>
+            <p>I'm an Aerospace Engineering student at Georgia Institute of Technology with a passion for designing and building autonomous systems. As an Air Force ROTC Cadet, I'm dedicated to excellence in engineering and leadership. My experience spans across robotics, CAD design, systems engineering, and autonomous vehicle development.</p>
+            
+            <div class="about-grid">
+                <div class="about-item">
+                    <h3>Education</h3>
+                    <p>Georgia Institute of Technology<br>Aerospace Engineering<br>Air Force ROTC</p>
+                </div>
+                <div class="about-item">
+                    <h3>Focus Areas</h3>
+                    <p>Autonomous Systems<br>UAV Design<br>Systems Engineering</p>
+                </div>
+                <div class="about-item">
+                    <h3>Approach</h3>
+                    <p>Rigorous analysis, innovative solutions, and attention to detail in every project</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects" id="projects">
+            <h2>Featured Projects</h2>
+            
+            <div class="project-grid">
+                <!-- Autonomous ISR UAV -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Autonomous ISR UAV</h3>
+                        <span class="project-tag">Featured</span>
+                    </div>
+                    <div class="project-content">
+                        <p>Designed and developed a complete autonomous Intelligence, Surveillance, and Reconnaissance (ISR) Unmanned Aerial Vehicle system. This project encompasses airframe design, autopilot integration, sensor systems, and autonomous mission planning.</p>
+                        <p><strong>Key Achievements:</strong></p>
+                        <ul style="margin-left: 1rem; margin-bottom: 1rem;">
+                            <li>Complete system integration from concept to prototype</li>
+                            <li>Advanced autonomous flight capabilities</li>
+                            <li>Multi-sensor payload integration</li>
+                            <li>Professional documentation and project management</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">CAD</span>
+                            <span class="tech-badge">Aerospace</span>
+                            <span class="tech-badge">Autonomous Systems</span>
+                            <span class="tech-badge">Systems Engineering</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com" target="_blank">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Physics Simulations -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Physics Simulations</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Advanced computational models simulating aerospace physics phenomena. These simulations support design validation, performance prediction, and educational purposes.</p>
+                        <p><strong>Highlights:</strong></p>
+                        <ul style="margin-left: 1rem; margin-bottom: 1rem;">
+                            <li>Aerodynamic flow analysis</li>
+                            <li>Structural dynamics simulation</li>
+                            <li>Real-time performance prediction</li>
+                            <li>Visualization and data analysis</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">MATLAB</span>
+                            <span class="tech-badge">CFD</span>
+                            <span class="tech-badge">Numerical Analysis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com" target="_blank">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAD and CNC Projects -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>CAD & Manufacturing</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Design and fabrication of precision components using professional CAD software and CNC machining. From concept sketches to finished parts, demonstrating the complete product development cycle.</p>
+                        <p><strong>Experience:</strong></p>
+                        <ul style="margin-left: 1rem; margin-bottom: 1rem;">
+                            <li>Professional CAD modeling</li>
+                            <li>CNC programming and operation</li>
+                            <li>Manufacturing optimization</li>
+                            <li>Quality assurance and testing</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">CATIA</span>
+                            <span class="tech-badge">Fusion 360</span>
+                            <span class="tech-badge">CNC</span>
+                            <span class="tech-badge">Manufacturing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com" target="_blank">View Details →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills" id="skills">
+            <h2>Skills & Expertise</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Aerospace Engineering</h3>
+                    <ul class="skill-list">
+                        <li>Aerodynamics</li>
+                        <li>Structures & Materials</li>
+                        <li>Systems Engineering</li>
+                        <li>Flight Mechanics</li>
+                        <li>Propulsion Systems</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Software & Programming</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>MATLAB</li>
+                        <li>C/C++</li>
+                        <li>CAD Software</li>
+                        <li>Simulation Tools</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Design & Manufacturing</h3>
+                    <ul class="skill-list">
+                        <li>CAD Modeling</li>
+                        <li>CNC Machining</li>
+                        <li>3D Printing</li>
+                        <li>Prototyping</li>
+                        <li>Design Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Project Management</h3>
+                    <ul class="skill-list">
+                        <li>Systems Integration</li>
+                        <li>Technical Documentation</li>
+                        <li>Team Leadership</li>
+                        <li>Risk Analysis</li>
+                        <li>Gantt Planning</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h2>Let's Work Together</h2>
+            <p>I'm interested in opportunities where I can apply my aerospace and engineering expertise. Feel free to reach out!</p>
+            
+            <div class="contact-links">
+                <a href="mailto:ewhite96@gatech.edu">Email</a>
+                <a href="https://www.linkedin.com/in/emmett-white-227b36249/" target="_blank">LinkedIn</a>
+                <a href="https://github.com" target="_blank">GitHub</a>
+                <a href="https://github.com/Autonomous_ISR_UAV" target="_blank">Project Repository</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Emmett White. All rights reserved.</p>
+    </footer>
 </body>
 </html>
